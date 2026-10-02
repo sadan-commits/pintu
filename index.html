@@ -1,0 +1,886 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PremiumDoors — Solusi Elegan Partisi Ruangan & Pintu Garasi</title>
+<meta name="description" content="Pintu garasi besi, folding door, dan partisi ruangan premium untuk hotel, restoran, dan proyek kontraktor.">
+
+<!-- Google Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+  /* ============ RESET & VARIABLES ============ */
+  :root{
+    --color-bg: #F8F9FA;
+    --color-bg-alt: #F1F2F4;
+    --color-text: #1A1A1A;
+    --color-text-soft: #4A4A4A;
+    --color-navy: #0A192F;
+    --color-navy-soft: #112240;
+    --color-gold: #D4AF37;
+    --color-gold-soft: #E8CE7B;
+    --color-white: #FFFFFF;
+    --radius: 10px;
+    --shadow-soft: 0 10px 30px rgba(10, 25, 47, 0.08);
+    --shadow-hover: 0 16px 40px rgba(10, 25, 47, 0.14);
+    --font-heading: 'Playfair Display', serif;
+    --font-body: 'Inter', sans-serif;
+    --transition: all 0.3s ease;
+  }
+
+  *{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+  }
+
+  html{
+    scroll-behavior:smooth;
+  }
+
+  body{
+    font-family: var(--font-body);
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    line-height:1.6;
+    overflow-x:hidden;
+  }
+
+  h1, h2, h3, h4{
+    font-family: var(--font-heading);
+    font-weight:700;
+    color: var(--color-navy);
+    line-height:1.25;
+  }
+
+  a{ text-decoration:none; color:inherit; }
+  ul{ list-style:none; }
+  img{ max-width:100%; display:block; }
+
+  .container{
+    width:100%;
+    max-width:1200px;
+    margin:0 auto;
+    padding:0 20px;
+  }
+
+  .section-label{
+    font-family: var(--font-body);
+    font-size:0.75rem;
+    letter-spacing:2.5px;
+    text-transform:uppercase;
+    color: var(--color-gold);
+    font-weight:600;
+    margin-bottom:10px;
+    display:block;
+  }
+
+  .btn{
+    display:inline-block;
+    padding:14px 32px;
+    border-radius: 6px;
+    font-weight:600;
+    font-size:0.95rem;
+    letter-spacing:0.3px;
+    cursor:pointer;
+    border:none;
+    transition: var(--transition);
+    text-align:center;
+  }
+
+  .btn-gold{
+    background: linear-gradient(135deg, var(--color-gold) 0%, var(--color-gold-soft) 100%);
+    color: var(--color-navy);
+    box-shadow: 0 8px 20px rgba(212, 175, 55, 0.35);
+  }
+  .btn-gold:hover{
+    transform: translateY(-3px) scale(1.03);
+    box-shadow: 0 12px 28px rgba(212, 175, 55, 0.45);
+  }
+
+  .btn-outline{
+    background:transparent;
+    color: var(--color-navy);
+    border:1.5px solid var(--color-navy);
+  }
+  .btn-outline:hover{
+    background: var(--color-navy);
+    color: var(--color-white);
+    transform: translateY(-2px);
+  }
+
+  /* ============ NAVBAR ============ */
+  .navbar{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    z-index:1000;
+    padding:18px 0;
+    transition: var(--transition);
+    background: rgba(248, 249, 250, 0.55);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border-bottom:1px solid rgba(10, 25, 47, 0.06);
+  }
+
+  .navbar.scrolled{
+    padding:12px 0;
+    background: rgba(248, 249, 250, 0.85);
+    box-shadow: 0 4px 24px rgba(10, 25, 47, 0.08);
+  }
+
+  .nav-inner{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+  }
+
+  .logo{
+    font-family: var(--font-heading);
+    font-size:1.4rem;
+    font-weight:800;
+    color: var(--color-navy);
+    letter-spacing:0.5px;
+  }
+  .logo span{ color: var(--color-gold); }
+
+  .nav-links{
+    display:none;
+    gap:36px;
+  }
+
+  .nav-links a{
+    font-size:0.92rem;
+    font-weight:500;
+    color: var(--color-text);
+    position:relative;
+    transition: var(--transition);
+  }
+  .nav-links a::after{
+    content:'';
+    position:absolute;
+    left:0; bottom:-4px;
+    width:0; height:2px;
+    background: var(--color-gold);
+    transition: var(--transition);
+  }
+  .nav-links a:hover{ color: var(--color-navy); }
+  .nav-links a:hover::after{ width:100%; }
+
+  .nav-cta{
+    display:none;
+  }
+
+  .hamburger{
+    display:flex;
+    flex-direction:column;
+    gap:5px;
+    background:none;
+    border:none;
+    cursor:pointer;
+    padding:6px;
+  }
+  .hamburger span{
+    width:24px;
+    height:2px;
+    background: var(--color-navy);
+    transition: var(--transition);
+  }
+  .hamburger.active span:nth-child(1){ transform: rotate(45deg) translate(5px, 5px); }
+  .hamburger.active span:nth-child(2){ opacity:0; }
+  .hamburger.active span:nth-child(3){ transform: rotate(-45deg) translate(5px, -5px); }
+
+  .mobile-menu{
+    position:fixed;
+    top:0; right:-100%;
+    width:78%;
+    max-width:320px;
+    height:100vh;
+    background: var(--color-white);
+    box-shadow: -10px 0 40px rgba(10,25,47,0.15);
+    z-index:1100;
+    transition: right 0.4s ease;
+    padding:100px 32px 40px;
+  }
+  .mobile-menu.open{ right:0; }
+
+  .mobile-menu a{
+    display:block;
+    padding:16px 0;
+    font-size:1.05rem;
+    font-weight:600;
+    color: var(--color-navy);
+    border-bottom:1px solid #eee;
+  }
+
+  .mobile-menu .btn{
+    margin-top:24px;
+    width:100%;
+  }
+
+  .overlay{
+    position:fixed;
+    inset:0;
+    background: rgba(10,25,47,0.5);
+    z-index:1050;
+    opacity:0;
+    visibility:hidden;
+    transition: var(--transition);
+  }
+  .overlay.active{ opacity:1; visibility:visible; }
+
+  /* ============ HERO ============ */
+  .hero{
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    padding:140px 0 80px;
+    background:
+      radial-gradient(circle at 85% 15%, rgba(212,175,55,0.08) 0%, transparent 45%),
+      linear-gradient(180deg, #FDFDFE 0%, var(--color-bg) 100%);
+    position:relative;
+  }
+
+  .hero-inner{
+    display:flex;
+    flex-direction:column;
+    gap:40px;
+  }
+
+  .hero-text{
+    max-width:640px;
+  }
+
+  .hero-text h1{
+    font-size:2.1rem;
+    margin-bottom:20px;
+  }
+
+  .hero-text p{
+    font-size:1.02rem;
+    color: var(--color-text-soft);
+    margin-bottom:32px;
+    max-width:520px;
+  }
+
+  .hero-cta-group{
+    display:flex;
+    flex-wrap:wrap;
+    gap:16px;
+  }
+
+  .hero-stats{
+    display:flex;
+    gap:32px;
+    margin-top:44px;
+    flex-wrap:wrap;
+  }
+
+  .stat h3{
+    font-size:1.7rem;
+    color: var(--color-gold);
+  }
+  .stat p{
+    font-size:0.82rem;
+    color: var(--color-text-soft);
+    margin:0;
+    text-transform:uppercase;
+    letter-spacing:0.5px;
+  }
+
+  .hero-visual{
+    width:100%;
+    aspect-ratio: 4 / 3;
+    background: linear-gradient(135deg, #E4E7EB 0%, #D3D7DC 100%);
+    border-radius: var(--radius);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    box-shadow: var(--shadow-soft);
+    border:1px solid rgba(10,25,47,0.05);
+    position:relative;
+    overflow:hidden;
+  }
+  .hero-visual::before{
+    content:'';
+    position:absolute;
+    inset:0;
+    background: repeating-linear-gradient(45deg, rgba(10,25,47,0.02) 0px, rgba(10,25,47,0.02) 2px, transparent 2px, transparent 14px);
+  }
+  .hero-visual img{
+    display:block;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    object-position:center;
+    border-radius: var(--radius);
+  }
+
+  /* ============ TRUST BAR ============ */
+  .trust-bar{
+    background: var(--color-navy);
+    padding:24px 0;
+  }
+  .trust-inner{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:24px 48px;
+  }
+  .trust-inner p{
+    color: rgba(255,255,255,0.75);
+    font-size:0.82rem;
+    letter-spacing:1px;
+    text-transform:uppercase;
+    font-weight:500;
+  }
+  .trust-inner p strong{
+    color: var(--color-gold);
+  }
+
+  /* ============ KATALOG ============ */
+  .catalog{
+    padding:90px 0;
+  }
+
+  .section-header{
+    text-align:center;
+    max-width:600px;
+    margin:0 auto 56px;
+  }
+
+  .section-header h2{
+    font-size:1.9rem;
+    margin-bottom:14px;
+  }
+
+  .section-header p{
+    color: var(--color-text-soft);
+    font-size:0.98rem;
+  }
+
+  .product-grid{
+    display:grid;
+    grid-template-columns:1fr;
+    gap:28px;
+  }
+
+  .product-card{
+    background: var(--color-white);
+    border-radius: var(--radius);
+    overflow:hidden;
+    box-shadow: var(--shadow-soft);
+    transition: var(--transition);
+    border:1px solid rgba(10,25,47,0.04);
+    display:flex;
+    flex-direction:column;
+  }
+
+  .product-card:hover{
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-hover);
+  }
+
+  .product-photo{
+    aspect-ratio: 16/11;
+    background: linear-gradient(135deg, #EAECEF 0%, #DDE1E5 100%);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    position:relative;
+  }
+  .product-photo::before{
+    content:'';
+    position:absolute;
+    inset:0;
+    background: repeating-linear-gradient(45deg, rgba(10,25,47,0.02) 0px, rgba(10,25,47,0.02) 2px, transparent 2px, transparent 14px);
+  }
+  .product-photo span{
+    color:#8A8F98;
+    font-size:0.85rem;
+    font-weight:600;
+    letter-spacing:0.4px;
+    z-index:1;
+    padding:0 16px;
+    text-align:center;
+  }
+
+  .product-body{
+    padding:26px 24px 28px;
+    display:flex;
+    flex-direction:column;
+    flex:1;
+  }
+
+  .product-tag{
+    font-size:0.7rem;
+    font-weight:700;
+    letter-spacing:1.5px;
+    text-transform:uppercase;
+    color: var(--color-gold);
+    margin-bottom:10px;
+  }
+
+  .product-body h3{
+    font-size:1.25rem;
+    margin-bottom:10px;
+  }
+
+  .product-body p{
+    color: var(--color-text-soft);
+    font-size:0.9rem;
+    margin-bottom:20px;
+    flex:1;
+  }
+
+  .product-link{
+    font-size:0.88rem;
+    font-weight:600;
+    color: var(--color-navy);
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    transition: var(--transition);
+  }
+  .product-link::after{
+    content:'→';
+    transition: var(--transition);
+  }
+  .product-link:hover{ color: var(--color-gold); }
+  .product-link:hover::after{ transform: translateX(4px); }
+
+  /* ============ WHY US ============ */
+  .why-us{
+    background: var(--color-navy);
+    padding:90px 0;
+  }
+  .why-us .section-header h2,
+  .why-us .section-header p{
+    color: var(--color-white);
+  }
+  .why-us .section-header p{
+    color: rgba(255,255,255,0.65);
+  }
+
+  .why-grid{
+    display:grid;
+    grid-template-columns:1fr;
+    gap:24px;
+  }
+
+  .why-item{
+    background: rgba(255,255,255,0.04);
+    border:1px solid rgba(255,255,255,0.08);
+    border-radius: var(--radius);
+    padding:28px 24px;
+    transition: var(--transition);
+  }
+  .why-item:hover{
+    background: rgba(212,175,55,0.08);
+    border-color: rgba(212,175,55,0.3);
+    transform: translateY(-4px);
+  }
+  .why-item .icon{
+    width:44px;
+    height:44px;
+    border-radius:50%;
+    background: rgba(212,175,55,0.15);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color: var(--color-gold);
+    font-weight:700;
+    margin-bottom:16px;
+    font-size:1.1rem;
+  }
+  .why-item h4{
+    color: var(--color-white);
+    font-size:1.05rem;
+    margin-bottom:8px;
+  }
+  .why-item p{
+    color: rgba(255,255,255,0.6);
+    font-size:0.88rem;
+  }
+
+  /* ============ CTA STRIP ============ */
+  .cta-strip{
+    padding:80px 0;
+    text-align:center;
+  }
+  .cta-strip h2{
+    font-size:1.7rem;
+    margin-bottom:16px;
+  }
+  .cta-strip p{
+    color: var(--color-text-soft);
+    max-width:520px;
+    margin:0 auto 32px;
+  }
+
+  /* ============ FOOTER ============ */
+  footer{
+    background: #08141F;
+    padding:56px 0 28px;
+  }
+  .footer-inner{
+    display:flex;
+    flex-direction:column;
+    gap:32px;
+  }
+  .footer-logo{
+    font-family: var(--font-heading);
+    font-size:1.3rem;
+    font-weight:800;
+    color: var(--color-white);
+  }
+  .footer-logo span{ color: var(--color-gold); }
+  .footer-desc{
+    color: rgba(255,255,255,0.5);
+    font-size:0.88rem;
+    max-width:360px;
+    margin-top:12px;
+  }
+  .footer-col h5{
+    color: var(--color-white);
+    font-family: var(--font-body);
+    font-size:0.85rem;
+    letter-spacing:1px;
+    text-transform:uppercase;
+    margin-bottom:16px;
+  }
+  .footer-col a, .footer-col p{
+    color: rgba(255,255,255,0.55);
+    font-size:0.9rem;
+    display:block;
+    margin-bottom:10px;
+    transition: var(--transition);
+  }
+  .footer-col a:hover{ color: var(--color-gold); }
+  .footer-bottom{
+    border-top:1px solid rgba(255,255,255,0.08);
+    margin-top:32px;
+    padding-top:24px;
+    text-align:center;
+    color: rgba(255,255,255,0.4);
+    font-size:0.8rem;
+  }
+
+  /* ============ WHATSAPP FLOATING BUTTON ============ */
+  .wa-float{
+    position:fixed;
+    bottom:24px;
+    right:24px;
+    z-index:900;
+    display:flex;
+    align-items:center;
+    gap:10px;
+    background: var(--color-navy);
+    color: var(--color-white);
+    padding:14px 18px;
+    border-radius:50px;
+    box-shadow: 0 10px 30px rgba(10,25,47,0.35);
+    border:1px solid rgba(212,175,55,0.4);
+    transition: var(--transition);
+    font-size:0.85rem;
+    font-weight:600;
+  }
+  .wa-float:hover{
+    transform: translateY(-4px) scale(1.04);
+    box-shadow: 0 14px 36px rgba(10,25,47,0.45);
+    background: var(--color-navy-soft);
+  }
+  .wa-float svg{
+    width:20px;
+    height:20px;
+    fill: var(--color-gold);
+    flex-shrink:0;
+  }
+  .wa-text{
+    display:none;
+  }
+
+  /* ============ RESPONSIVE (TABLET & DESKTOP) ============ */
+  @media (min-width: 768px){
+    .hero-text h1{ font-size:2.9rem; }
+    .product-grid{ grid-template-columns: repeat(2, 1fr); }
+    .why-grid{ grid-template-columns: repeat(2, 1fr); }
+    .footer-inner{ flex-direction:row; justify-content:space-between; }
+    .wa-text{ display:inline; }
+  }
+
+  @media (min-width: 1024px){
+    .nav-links{ display:flex; }
+    .nav-cta{ display:inline-block; }
+    .hamburger{ display:none; }
+
+    .hero-inner{
+      flex-direction:row;
+      align-items:center;
+    }
+    .hero-text{ flex:1; }
+    .hero-visual{ flex:1; }
+    .hero-text h1{ font-size:3.3rem; }
+
+    .product-grid{ grid-template-columns: repeat(3, 1fr); }
+    .why-grid{ grid-template-columns: repeat(4, 1fr); }
+  }
+
+  @media (min-width: 1024px){
+    .section-header h2{ font-size:2.3rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ NAVBAR ============ -->
+<header class="navbar" id="navbar">
+  <div class="container nav-inner">
+    <a href="#hero" class="logo">Premium<span>Doors</span></a>
+
+    <nav class="nav-links">
+      <a href="#katalog">Katalog</a>
+      <a href="#keunggulan">Keunggulan</a>
+      <a href="#kontak">Kontak</a>
+    </nav>
+
+    <a href="#kontak" class="btn btn-gold nav-cta">Konsultasikan Proyek Anda</a>
+
+    <button class="hamburger" id="hamburger" aria-label="Buka menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<div class="overlay" id="overlay"></div>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#katalog">Katalog</a>
+  <a href="#keunggulan">Keunggulan</a>
+  <a href="#kontak">Kontak</a>
+  <a href="#kontak" class="btn btn-gold">Konsultasikan Proyek Anda</a>
+</div>
+
+<!-- ============ HERO ============ -->
+<section class="hero" id="hero">
+  <div class="container hero-inner">
+    <div class="hero-text">
+      <span class="section-label">Pintu Garasi & Partisi Premium</span>
+      <h1>Solusi Elegan Partisi Ruangan & Pintu Garasi</h1>
+      <p>Kami menghadirkan pintu garasi besi, folding door, dan penyekat ruangan dengan material kokoh serta finishing powder coating tahan lama — dirancang khusus untuk kebutuhan hotel, restoran, dan proyek konstruksi berskala besar.</p>
+      <div class="hero-cta-group">
+        <a href="#kontak" class="btn btn-gold">Konsultasikan Proyek Anda</a>
+        <a href="#katalog" class="btn btn-outline">Lihat Katalog</a>
+      </div>
+
+      <div class="hero-stats">
+        <div class="stat">
+          <h3>500+</h3>
+          <p>Proyek Selesai</p>
+        </div>
+        <div class="stat">
+          <h3>15+</h3>
+          <p>Tahun Pengalaman</p>
+        </div>
+        <div class="stat">
+          <h3>100%</h3>
+          <p>Custom Fabrikasi</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-visual">
+      <img src="gambar6.jpeg" alt="Pintu Garasi Besi Premium">
+    </div>
+  </div>
+</section>
+
+<!-- ============ TRUST BAR ============ -->
+<div class="trust-bar">
+  <div class="container trust-inner">
+    <p>Dipercaya oleh <strong>Kontraktor</strong></p>
+    <p>Mitra <strong>Hotel & Resort</strong></p>
+    <p>Rekanan <strong>Restoran Group</strong></p>
+    <p>Garansi <strong>Material Resmi</strong></p>
+  </div>
+</div>
+
+<!-- ============ KATALOG ============ -->
+<section class="catalog" id="katalog">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-label">Katalog Eksklusif</span>
+      <h2>Produk Unggulan Kami</h2>
+      <p>Setiap produk difabrikasi dengan standar industri tinggi, disesuaikan dengan kebutuhan proyek komersial Anda.</p>
+    </div>
+
+    <div class="product-grid">
+
+      <div class="product-card">
+        <div class="product-photo">
+          <span><img src="gambar5.png" alt="Pintu Garasi & Folding Door"></span>
+        </div>
+        <div class="product-body">
+          <span class="product-tag">Garasi & Akses</span>
+          <h3>Pintu Garasi & Folding Door</h3>
+          <p>Konstruksi besi solid dengan sistem lipat/geser presisi, ideal untuk area garasi komersial, gudang, hingga akses kendaraan berat.</p>
+          <a href="#kontak" class="product-link">Minta Penawaran</a>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <div class="product-photo">
+          <span><img src="gambar2.png" alt="Penyekat Ruangan Sorepa"></span>
+        </div>
+        <div class="product-body">
+          <span class="product-tag">Interior Premium</span>
+          <h3>Penyekat Ruangan Sorepa (Peredam Suara Tinggi)</h3>
+          <p>Partisi akustik dengan kemampuan peredaman suara superior, cocok untuk ballroom hotel, ruang meeting, dan area restoran multifungsi.</p>
+          <a href="#kontak" class="product-link">Minta Penawaran</a>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <div class="product-photo">
+          <span><img src="gambar1.png" alt="Pintu Emergency"></span>
+        </div>
+        <div class="product-body">
+          <span class="product-tag">Keamanan & Safety</span>
+          <h3>Pintu Emergency</h3>
+          <p>Dirancang memenuhi standar keselamatan bangunan komersial, dengan mekanisme buka cepat dan material tahan api sesuai regulasi.</p>
+          <a href="#kontak" class="product-link">Minta Penawaran</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============ KEUNGGULAN ============ -->
+<section class="why-us" id="keunggulan">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-label">Mengapa Memilih Kami</span>
+      <h2>Kualitas yang Dipercaya Industri</h2>
+      <p>Kami memahami kebutuhan proyek B2B — presisi, ketahanan, dan pengerjaan tepat waktu.</p>
+    </div>
+
+    <div class="why-grid">
+      <div class="why-item">
+        <div class="icon">01</div>
+        <h4>Material Kokoh</h4>
+        <p>Besi berkualitas tinggi dengan finishing powder coating anti-karat dan tahan cuaca ekstrem.</p>
+      </div>
+      <div class="why-item">
+        <div class="icon">02</div>
+        <h4>Custom Fabrikasi</h4>
+        <p>Ukuran dan desain disesuaikan penuh dengan spesifikasi arsitektur proyek Anda.</p>
+      </div>
+      <div class="why-item">
+        <div class="icon">03</div>
+        <h4>Tim Berpengalaman</h4>
+        <p>Instalasi ditangani teknisi profesional dengan rekam jejak proyek skala besar.</p>
+      </div>
+      <div class="why-item">
+        <div class="icon">04</div>
+        <h4>Garansi Resmi</h4>
+        <p>Setiap produk dilengkapi garansi material dan layanan purna jual yang jelas.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CTA STRIP ============ -->
+<section class="cta-strip" id="kontak">
+  <div class="container">
+    <h2>Siap Mewujudkan Proyek Anda?</h2>
+    <p>Konsultasikan kebutuhan pintu garasi atau partisi ruangan Anda bersama tim ahli kami — gratis survei dan penawaran untuk proyek B2B.</p>
+    <a href="https://wa.me/6281234567890" target="_blank" rel="noopener" class="btn btn-gold">Konsultasikan Proyek Anda</a>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="container footer-inner">
+    <div>
+      <div class="footer-logo">Premium<span>Doors</span></div>
+      <p class="footer-desc">Spesialis pintu garasi besi & partisi ruangan premium untuk proyek hotel, restoran, dan kontraktor di seluruh Indonesia.</p>
+    </div>
+
+    <div class="footer-col">
+      <h5>Navigasi</h5>
+      <a href="#katalog">Katalog</a>
+      <a href="#keunggulan">Keunggulan</a>
+      <a href="#kontak">Kontak</a>
+    </div>
+
+    <div class="footer-col">
+      <h5>Kontak</h5>
+      <p>WhatsApp: +62 851 9628 3891</p>
+      <p>Email: info@premiumdoors.id</p>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    PremiumDoors. cv. pintu anugrah
+  </div>
+</footer>
+
+<!-- ============ WHATSAPP FLOATING BUTTON ============ -->
+<a href="https://wa.me/6285196283891" target="_blank" rel="noopener" class="wa-float" id="waFloat">
+  <svg viewBox="0 0 24 24"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38a9.9 9.9 0 0 0 4.74 1.21h.005c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2zm5.8 14.16c-.24.68-1.4 1.3-1.93 1.38-.5.08-1.12.11-1.8-.11-.42-.13-.96-.31-1.65-.6-2.9-1.25-4.8-4.16-4.94-4.35-.14-.19-1.18-1.57-1.18-3 0-1.42.75-2.12 1.02-2.41.27-.29.58-.36.78-.36.19 0 .39 0 .56.01.18.01.42-.07.65.5.24.58.82 2 .89 2.15.07.15.12.32.02.51-.09.19-.14.31-.28.48-.14.16-.29.36-.42.48-.14.13-.28.28-.12.55.16.27.72 1.19 1.55 1.93 1.06.95 1.96 1.24 2.23 1.38.27.14.43.12.59-.07.16-.19.68-.79.86-1.06.18-.27.36-.22.6-.13.24.09 1.53.72 1.79.85.26.13.43.19.5.3.07.11.07.63-.17 1.31z"/></svg>
+  <span class="wa-text">Chat via WhatsApp</span>
+</a>
+
+<script>
+
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 30) {
+      navbar.classList.add('scrolled');
+    } else {
+      navbar.classList.remove('scrolled');
+    }
+  });
+
+
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobileMenu');
+  const overlay = document.getElementById('overlay');
+
+  function toggleMenu() {
+    hamburger.classList.toggle('active');
+    mobileMenu.classList.toggle('open');
+    overlay.classList.toggle('active');
+  }
+
+  hamburger.addEventListener('click', toggleMenu);
+  overlay.addEventListener('click', toggleMenu);
+
+  // Tutup menu mobile saat link ditekan
+  document.querySelectorAll('.mobile-menu a').forEach(link => {
+    link.addEventListener('click', () => {
+      if (mobileMenu.classList.contains('open')) toggleMenu();
+    });
+  });
+
+  // ============ SMOOTH SCROLL UNTUK SEMUA ANCHOR LINK ============
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+      const targetId = this.getAttribute('href');
+      const target = document.querySelector(targetId);
+      if (target) {
+        e.preventDefault();
+        const offset = 80; // kompensasi tinggi navbar sticky
+        const top = target.getBoundingClientRect().top + window.pageYOffset - offset;
+        window.scrollTo({ top, behavior: 'smooth' });
+      }
+    });
+  });
+</script>
+
+</body>
+</html>
